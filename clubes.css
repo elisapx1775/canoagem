@@ -1,0 +1,207 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  overflow-y: auto;
+  font-family: sans-serif;
+  background-color: #B4DBDC;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  z-index: 1000;
+  user-select: none;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #e8e8e8;
+  font-size: 24px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-button:hover {
+  color: #ffcc00;
+}
+
+.back-button::before {
+  content: '←';
+}
+
+.navbar-title {
+  font-size: 18px;
+}
+
+/* CONTAINER */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+  padding-top: 70px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+}
+
+/* BOX WRAPPER */
+.box-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* CÍRCULO */
+.circulo {
+  position: absolute;
+  top: 30px; 
+  left:50%;  
+  width: 120px;
+  height: 60px;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 60px;
+  background-color: #1D4355;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Esconde o círculo quando caixa expandida */
+.box.expanded ~ .circulo,
+.box.expanded + .circulo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* CAIXAS */
+.box {
+  scroll-margin-top: 70px;
+  width: 100%;
+  height: 100px;
+  background-color: #e8e8e8;
+  border-radius: 40px;
+  box-shadow: 2px 2px 20px #242064;
+  transition: height 0.4s ease;
+  overflow: hidden;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.box.expanded {
+  height: fit-content;
+}
+div{
+  flex-wrap: wrap;
+}
+
+/* TEXTO */
+.text-content {
+   display: flex;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-top: 20px;
+}
+
+.box.expanded .text-content {
+  opacity: 1;
+}
+
+/* BOTÃO "+" */
+.toggle-btn {
+  position: absolute;
+  right: -15px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #1D4355;;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+  user-select: none;
+}
+
+.toggle-btn:hover {
+  background-color: #0056b3;
+}
+
+/* BLOCOS DE INFORMAÇÃO */
+.info {
+  background-color: #1D4355;
+  border-radius: 40px;
+  color: #e8e8e8;
+  width: 70%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* FONTE */
+h1 {
+  color: white;
+  margin: 0;
+}
+.info h3 {
+  color:#41C1BA;
+  margin-bottom: -3px;  /* diminui margem inferior do h3 */
+}
+
+.info p {
+  margin-top: 0;  
+  text-align: left;  
+  margin: 10px;
+}
+
+
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+

@@ -1,0 +1,126 @@
+/* meteorologia.css */
+.navbar {
+  width: 100%;
+  display: flex;
+  background-color: #333;
+  color: white;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  z-index: 1000;
+  user-select: none;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  margin-right: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  line-height: 1;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  padding-top: 70px; /* Para não ficar escondido atrás da navbar */
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background-color: #B4DBDC;
+
+}
+
+h1 {
+  padding-top: 20px;
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: 3rem;
+  color: #1D4355;
+  letter-spacing: 3px;
+  margin-bottom: 5px;
+}
+
+
+
+
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.segurança {
+  width: 95%;
+  min-height: 100px;
+  background-color: #e8e8e8;
+  border-radius: 40px;
+  transition: height 0.4s ease;
+  padding: 15px 30px 15px 15px;
+  box-sizing: border-box;
+  margin: 10px 0 10px 0px; /* margem para cima, direita, baixo e uma margem leve à esquerda */
+  align-self: flex-start; /* Alinha a caixa à esquerda dentro do container flex */
+  box-shadow: 2px 2px 20px #242064;
+   text-align: left;
+
+}
+
+#meteorologia {
+  width: 60%;
+  margin: 10px;
+  align-self: flex-start;
+}
+#meteorologia p {
+  line-height: 1.2; 
+  margin: 4px 0;   
+  align-self: flex-start;
+}
+.boia{
+  position:absolute;
+  top: 180px; 
+  left: 285px;
+}
+.sol{
+  position:absolute;
+  top: 630px; 
+  left: 270px;
+  
+}
+.canoa{
+  transform: rotate(10deg);
+  position:absolute;
+  top: 350px; 
+  left: -3px;
+  
+}
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.segurança ul,
+.segurança li,
+.segurança p {
+  text-align: left;
+}
+
+.segurança ul {
+  padding-left: 20px; /* Garante indentação dos marcadores */
+  margin: 0;
+  align-self: flex-start; /* opcional, se necessário */
+}
+
+.segurança li {
+  text-align: left;
+  margin-bottom: 5px; /* Espaço entre itens, se desejares */
+  line-height: 1.4; /* Altura de linha confortável */
+}
+
+

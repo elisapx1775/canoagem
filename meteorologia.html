@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meteorologia</title>
+  <link rel="stylesheet" href="meteorologia.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hammersmith+One&display=swap" rel="stylesheet">
+
+ <style>
+        /* Estilo básico para pop-up */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            z-index: 10000;
+            width: 300px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #popup.bom {
+            border: 3px solid green;
+            color: green;
+        }
+        #popup.ruim {
+            border: 3px solid red;
+            color: red;
+        }
+        #popup button {
+            margin-top: 15px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function mostrar(secao) {
+            document.getElementById("oque").style.display = "none";
+            document.getElementById("vantagens").style.display = "none";
+            document.getElementById("regras").style.display = "none";
+
+            document.getElementById(secao).style.display = "block";
+        }
+
+        // Função para exibir o pop-up
+        function mostrarPopup(mensagem, tipo) {
+            const popup = document.getElementById('popup');
+            popup.innerHTML = mensagem + '<br><button onclick="fecharPopup()">Fechar</button>';
+            popup.className = tipo;
+            popup.style.display = 'block';
+        }
+
+        function fecharPopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Quando a página carregar, buscar dados do clima
+        window.onload = function() {
+            const API_KEY = '78407d143c58491e3d2922b09b2576eb';
+            const cidade = 'Lisbon';
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade},PT&units=metric&appid=${API_KEY}&lang=pt`)
+                .then(res => res.json())
+                .then(data => {
+                    const temp = data.main.temp;
+                    const vento = data.wind.speed;
+                    const descricao = data.weather[0].description.toLowerCase();
+
+                    // Regras para decidir se o clima é bom ou ruim
+                    const condicaoRuim = (temp > 25) || ((descricao.includes("chuva") || descricao.includes("tempestade")) && vento > 5);
+
+                    if (condicaoRuim) {
+                        mostrarPopup(
+                            `⚠️ Condições meteorológicas perigosas para canoagem!<br>
+                            Temperatura: ${temp.toFixed(1)}°C<br>
+                            Vento: ${vento.toFixed(1)} m/s<br>
+                            Condição: ${descricao}`, 'ruim');
+                    } else {
+                        mostrarPopup(
+                            `👍 Condições favoráveis para canoagem!<br>
+                            Temperatura: ${temp.toFixed(1)}°C<br>
+                            Vento: ${vento.toFixed(1)} m/s<br>
+                            Condição: ${descricao}`, 'bom');
+                    }
+                })
+                .catch(err => {
+                    console.error("Erro ao buscar dados do clima:", err);
+                    // Opcional: mostrar mensagem de erro no pop-up
+                    mostrarPopup('Não foi possível carregar os dados meteorológicos.', 'ruim');
+                });
+        };
+    </script>
+</head>
+
+ <div class="nav-bar">
+        <a href="#" class="nav-item" onclick="mostrar('oque')">O que é</a>
+        <a href="#" class="nav-item" onclick="mostrar('vantagens')">Vantagens</a>
+        <a href="#" class="nav-item" onclick="mostrar('regras')">Regras</a>
+    </div>
+
+    <div id="oque" style="display: block;">
+        <p class="cxCaixas">
+            <img src="canoa.png" class="hover-image" alt="Image">
+            <d class="box-title">O que é?</d>
+            <d class="box-textcolor">.........................................................................</d>
+            <d class="box-text">
+                Canoagem de mar é uma nova variante da canoagem cujo objetivo é cumprir determinados percursos em mar aberto, com largada e chegada em locais distintos...
+            </d>
+        </p>
+    </div>
+
+    <div id="vantagens" style="display: none;">
+        <p class="cxCaixas">
+            <d class="box-title">Vantagens</d>
+            <d class="box-textcolor">......................................................................................</d>
+            <d class="box-text">
+                A canoagem é uma atividade ao ar livre que permite exercitar o corpo, ganhar coordenação, estabilidade e força...
+            </d>
+        </p>
+    </div>
+
+    <div id="regras" style="display: none;">
+        <p class="cxCaixas">
+            <d class="box-title">Regras</d>
+            <d class="box-textcolor">.........................................................................</d>
+            <d class="box-subtitle">PERCURSO: </d>
+            <d class="box-textcolor">.................................................................</d>
+            <d class="box-text">
+                - O percurso deverá ser em águas marinhas, completamente navegáveis em distância superior a 10 km;
+            </d>
+            <d class="box-text">
+                - A largada normalmente é dada em terra...
+            </d>
+            <d class="box-subtitle">EQUIPAMENTO: </d>
+            <d class="box-text">
+                - É vedada a participação de caiaques utilizados em provas de Velocidade, Maratona e Descida;
+            </d>
+            <d class="box-text">
+                - É permitida a utilização de bússola, bomba para escoamento de água e remos reservas...
+            </d>
+            <d class="box-subtitle">CONDUTA: </d>
+            <d class="box-text">
+                - Todo o atleta em competição é obrigado a ajudar qualquer atleta em perigo;
+                - Nenhum atleta pode agarrar a embarcação do adversário...
+            </d>
+        </p>
+    </div>
+
+    <div class="practice-box">
+        <a href="clubes.html" class="practice-link">
+            <i class="fas fa-search"></i>
+            <p>ONDE PRATICAR <span>&#128269;</span></p>
+        </a>
+    </div>
+
+    <!-- Pop-up -->
+    <div id="popup"></div>
+</body>
+</html>
