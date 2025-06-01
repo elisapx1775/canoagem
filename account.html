@@ -8,15 +8,29 @@
     <script src="ligin.js"></script>
 </head>
 <body>
+    <script>
+        window.onload = () => {
+          const userData = JSON.parse(localStorage.getItem('user'));
+      
+          if (!userData) {
+            // Redirect to login if user data doesn't exist
+            window.location.href = 'loginpage.html';
+            return;
+          }
+      
+          // Set user data on the page
+          document.getElementById('user-name').textContent = userData.name;
+          document.getElementById('user-email').textContent = `Email: ${userData.email}`;
+        };
+      </script>
     <div class="edit-profile">
         <div class="profile-card">
-            <img src="" alt="Profile Picture" class="profile-pic">
-            <h1>Yasmina</h2>
-            <p>Email: yasmina@example.com</p>
+            <h1 id="user-name">Nome</h1>
+            <p id="user-email">Email: email@example.com</p>
             <button><a href="edit_profile.html"> Editar Prefil </a></button>
-            <button><a href="loginpage.html">Logout </a></button>
+            <button><a href="welcome.html">Logout </a></button>
         </div>
-        <p> <img src="waves.png" style="width: 100%; display: block; margin: 0; padding: 0;"></p>
+        <p> <img class="waves-img" src="waves.png" alt="waves"/></p>
         <div class="sobrenós">
             <p> <img src="sobre_nós.png" style="width: 350px;"></p>
             <p style="color: black; text-decoration: underline;"> Esta aplicação foi desenvolvida por: Elisa Pousada, nº6; Joana Aparício, nº10; Yasmin Altoe, nº22, do 12ºC, Escola Secundária Quinta do Marquês.</p>
