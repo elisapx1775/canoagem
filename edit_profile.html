@@ -5,34 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Profile</title>
     <link rel="stylesheet" href="edit_profile.css">
+    <script src="ligin.js"></script>
 </head>
 <body>
+
     <div class="edit-profile">
         <p><img src="editar_perfil.png" style="width: 350px;"></p>
         
-        <form>
-          <div class="form-group">
-            <label for="profile-pic">Fotografia de Perfil</label>
-            <input type="file" id="profile-pic">
-          </div>
-      
+        <form id="edit-profile-form">
           <div class="form-group">
             <label for="name">Nome</label>
-            <input type="text" id="name" value="Yasmina">
+            <input type="text" id="name" required>
           </div>
-      
+        
           <div class="form-group">
             <label for="email">Endereço de Email</label>
-            <input type="email" id="email" value="yasmina@gmail.com">
+            <input type="email" id="email" required>
           </div>
-      
+        
           <div class="form-group">
-            <label for="password">Nova Password </label>
-            <input type="password" id="password">
+            <label for="password">Nova Password</label>
+            <input type="password" id="password" required>
           </div>
-      
-          <button type="submit"> <a href="account.html"> Salvar </a></button>
-          <button type="button"> <a href="account.html">Cancelar </a></button>
+        
+          <button type="submit">Salvar</button>
+          <button type="button" onclick="cancelEdit()">Cancelar</button>
         </form>
+        <script>
+          window.onload = () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+              window.location.href = 'loginpage.html';
+              return;
+            }
+        
+            // Pre-fill fields
+            document.getElementById('name').value = user.name;
+            document.getElementById('email').value = user.email;
+            document.getElementById('password').value = user.password;
+          };
+        
+          document.getElementById('edit-profile-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // prevent page reload
+        
+            const updatedName = document.getElementById('name').value;
+            const updatedEmail = document.getElementById('email').value;
+            const updatedPassword = document.getElementById('password').value;
+        
+            // Save updated data
+            localStorage.setItem('user', JSON.stringify({
+              name: updatedName,
+              email: updatedEmail,
+              password: updatedPassword
+            }));
+        
+            alert('Perfil atualizado com sucesso!');
+            window.location.href = 'account.html';
+          });
+        
+          function cancelEdit() {
+            window.location.href = 'account.html';
+          }
+        </script>
       </div>      
 </body>
+</html>
