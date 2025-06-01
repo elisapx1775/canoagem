@@ -5,95 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Caixas Expansíveis com Navbar</title>
   <link rel="stylesheet" href="clubes.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hammersmith+One&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Hammersmith+One&display=swap" rel="stylesheet" />
 </head>
 <body>
   <!-- NAVBAR -->
   <nav class="navbar">
-    <button class="back-button" aria-label="Voltar"></button>
+    <button class="back-button" aria-label="Voltar" onclick="irParaOutraPagina()"></button>
     <span class="navbar-title">Clubes</span>
   </nav>
 
- <div class="container">
-  <div class="box-wrapper">
-    <button class="toggle-btn" aria-label="Expandir caixa">+</button>
-    <div class="box">
-      <div class="text-content">
-        <h2 class="bebas-neue-regular">JAMOR</h2>
-        <div class="info">
-          <h3>Informação</h3>
-          <p>Clube BORK Canoagem Oeiras</p>
-        </div>
-        <div class="info">
-           <h3>Contactos</h3>
-          <p>CORREIO ELETRÓNICO: bork@borkyou.com</p>
-          <p>TELEFONE: +351 919 506 136 |+351 916 097 744 |+351 21 441 3574</p>
-        </div>
-        <div class="info">
-          <h3>Horários</h3>
-          <br>
-             <a href="files/exemplo.pdf" download>📄 Baixar PDF</a>
-        </div>
-      </div>
-    </div>
-    <div class="circulo">
-      <h1 class="bebas-neue-regular">JAMOR</h1>
-    </div>
-  </div>
-
-  <!-- Segunda caixa igual -->
-  <div class="box-wrapper">
-    <button class="toggle-btn" aria-label="Expandir caixa">+</button>
-    <div class="box">
-            <div class="text-content">
-        <h2 class="bebas-neue-regular">JAMOR</h2>
-        <div class="info">
-          <h3>Informação</h3>
-          <p>Clube do Mar Costa Sol</p>
-        </div>
-        <div class="info">
-           <h3>Contactos</h3>
-          <ul>CORREIO ELETRÓNICO
-            <li>direcao.cmcs@gmail.com</li>
-            <li>tesoureiro.cmcs@gmail.com</li>
-          </ul>
-          <p>TELEFONE: +351 914 177 994</p>
-        </div>
-        <div class="info">
-          <h3>Horários</h3>
-             <a href="files/exemplo.pdf" download>📄 Baixar PDF</a>
+  <div class="container">
+    <!-- Caixa 1 -->
+    <div class="box-wrapper">
+      <button class="toggle-btn" onclick="expandir0()" aria-label="Expandir caixa">+</button>
+      <div id="box0" class="box">
+        <div class="text-content">
+          <h2 class="bebas-neue-regular">JAMOR</h2>
+          <div class="info">
+            <h3>Informação</h3>
+            <p>Clube BORK Canoagem Oeiras</p>
+          </div>
+          <div class="info">
+            <h3>Contactos</h3>
+            <p>CORREIO ELETRÓNICO: bork@borkyou.com</p>
+            <p>TELEFONE: +351 919 506 136 | +351 916 097 744 | +351 21 441 3574</p>
+          </div>
+          <div class="info">
+            <h3>Horários</h3>
+            <br />
+            <a href="files/exemplo.pdf" download>📄 Baixar PDF</a>
+          </div>
         </div>
       </div>
+      <div class="circulo">
+        <h1 class="bebas-neue-regular">JAMOR</h1>
+      </div>
     </div>
-    <div class="circulo">
-      <h1 class="bebas-neue-regular">JAMOR</h1>
+
+    <!-- Caixa 2 -->
+    <div class="box-wrapper">
+      <button class="toggle-btn" onclick="expandir1()" aria-label="Expandir caixa">+</button>
+      <div id="box1" class="box">
+        <div class="text-content">
+          <h2 class="bebas-neue-regular">Mar Costa Sul</h2>
+          <div class="info">
+            <h3>Informação</h3>
+            <p>Clube do Mar Costa Sol</p>
+          </div>
+          <div class="info">
+            <h3>Contactos</h3>
+            <ul>
+              <li>CORREIO ELETRÓNICO:</li>
+              <li>direcao.cmcs@gmail.com</li>
+              <li>tesoureiro.cmcs@gmail.com</li>
+            </ul>
+            <p>TELEFONE: +351 914 177 994</p>
+          </div>
+          <div class="info">
+            <h3>Horários</h3>
+            <a href="files/exemplo.pdf" download>📄 Baixar PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="circulo">
+        <h1 class="bebas-neue-regular">Mar Costa Sul</h1>
+      </div>
     </div>
   </div>
-</div>
-
 
   <script>
-    // Voltar à home page
+    // Estados simples para cada caixa: 0 = fechado, 1 = aberto
+    let estado0 = 0;
+    let estado1 = 0;
+
+    function expandir0() {
+      const caixa = document.getElementById('box0');
+      if (estado0 === 0) {
+        caixa.classList.add('expanded');
+        caixa.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        estado0 = 1;
+      } else {
+        caixa.classList.remove('expanded');
+        estado0 = 0;
+      }
+    }
+
+    function expandir1() {
+      const caixa = document.getElementById('box1');
+      if (estado1 === 0) {
+        caixa.classList.add('expanded');
+        caixa.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        estado1 = 1;
+      } else {
+        caixa.classList.remove('expanded');
+        estado1 = 0;
+      }
+    }
+
+    // Função para voltar para a página inicial
     function irParaOutraPagina() {
       window.location.href = 'home_page.html';
     }
-
-    document.querySelector('.back-button').addEventListener('click', irParaOutraPagina);
-
-    // Expandir caixas
-    const botoes = document.querySelectorAll('.toggle-btn');
-    botoes.forEach(botao => {
-      botao.addEventListener('click', () => {
-        const caixa = botao.nextElementSibling;
-        caixa.classList.toggle('expanded');
-
-        if (caixa.classList.contains('expanded')) {
-          caixa.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
   </script>
 </body>
 </html>
