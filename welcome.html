@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Página de Login</title>
+  <link rel="stylesheet" href="welcome.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="login-signup">
+      <div class="box" id="login" onclick="toggleLogin()">Login</div>
+      <div class="box" id="signup" onclick="toggleSignup()">Sign Up</div>
+    </div>
+
+    <div class="input-fields" id="input-fields"></div>
+  </div>
+
+  <script>
+    const inputFieldsContainer = document.getElementById('input-fields');
+
+    function clearInputs() {
+      inputFieldsContainer.innerHTML = '';
+    }
+
+    function showLoginInputs() {
+      clearInputs();
+
+      const inputs = [];
+
+      const loginEmailInput = document.createElement('input');
+      loginEmailInput.type = 'email';
+      loginEmailInput.placeholder = 'Email';
+      loginEmailInput.id = 'loginEmail';
+      loginEmailInput.className = 'input-box hidden';
+      inputs.push(loginEmailInput);
+
+      const loginPasswordInput = document.createElement('input');
+      loginPasswordInput.type = 'password';
+      loginPasswordInput.placeholder = 'Password';
+      loginPasswordInput.id = 'loginPassword';
+      loginPasswordInput.className = 'input-box hidden';
+      inputs.push(loginPasswordInput);
+
+      const loginButton = document.createElement('button');
+      loginButton.textContent = 'Login';
+      loginButton.onclick = login;
+      loginButton.className = 'input-box hidden';
+      inputs.push(loginButton);
+
+      inputs.forEach(input => inputFieldsContainer.appendChild(input));
+
+      setTimeout(() => {
+        inputs.forEach(input => input.classList.remove('hidden'));
+      }, 10);
+    }
+
+    function showSignupInputs() {
+      clearInputs();
+
+      const inputs = [];
+
+      const signupNameInput = document.createElement('input');
+      signupNameInput.type = 'text';
+      signupNameInput.placeholder = 'Name';
+      signupNameInput.id = 'signupName';
+      signupNameInput.className = 'input-box hidden';
+      inputs.push(signupNameInput);
+
+      const signupEmailInput = document.createElement('input');
+      signupEmailInput.type = 'email';
+      signupEmailInput.placeholder = 'Email';
+      signupEmailInput.id = 'signupEmail';
+      signupEmailInput.className = 'input-box hidden';
+      inputs.push(signupEmailInput);
+
+      const signupPasswordInput = document.createElement('input');
+      signupPasswordInput.type = 'password';
+      signupPasswordInput.placeholder = 'Password';
+      signupPasswordInput.id = 'signupPassword';
+      signupPasswordInput.className = 'input-box hidden';
+      inputs.push(signupPasswordInput);
+
+      const signupButton = document.createElement('button');
+      signupButton.textContent = 'Sign up';
+      signupButton.onclick = signup;
+      signupButton.className = 'input-box hidden';
+      inputs.push(signupButton);
+
+      inputs.forEach(input => inputFieldsContainer.appendChild(input));
+
+      setTimeout(() => {
+        inputs.forEach(input => input.classList.remove('hidden'));
+      }, 10);
+    }
+
+    function toggleLogin() {
+      document.getElementById('login').classList.add('active');
+      document.getElementById('signup').classList.remove('active');
+      showLoginInputs();
+    }
+
+    function toggleSignup() {
+      document.getElementById('signup').classList.add('active');
+      document.getElementById('login').classList.remove('active');
+      showSignupInputs();
+    }
+
+    function signup() {
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+
+  if (!name || !email || !password) {
+    alert('Preencha todos os campos!');
+    return;
+  }
+
+  const existingUser = JSON.parse(localStorage.getItem('user'));
+
+  if (existingUser && existingUser.email === email) {
+    alert('This user already exists!');
+    return;
+  }
+
+  localStorage.setItem('user', JSON.stringify({ name, email, password }));
+  alert('Cadastro feito com sucesso! Agora você pode fazer login.');
+  toggleLogin();
+}
+
+
+    function login() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      const userData = JSON.parse(localStorage.getItem('user'));
+
+      if (!userData) {
+        alert('Nenhum usuário cadastrado!');
+        return;
+      }
+
+      if (email === userData.email && password === userData.password) {
+        window.location.href = 'home_page.html';
+      } else {
+        alert('Email ou senha incorretos!');
+      }
+    }
+
+    window.onload = () => {
+      toggleLogin();
+    };
+  </script>
+</body>
+</html>

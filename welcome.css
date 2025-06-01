@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(background_ondas.gif);
+    background-repeat: repeat-x;
+    background-size: cover;
+    image-rendering: pixelated;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    width: 300px;
+}
+
+.login-signup {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.box {
+    padding: 10px 20px;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.box:hover {
+    background-color: #bbb;
+}
+
+.box.active {
+    background-color: #333;
+    color: white;
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+
+
+/* EFEITO CASCATA */
+.input-box:nth-child(1) { transition-delay: 0.1s; }
+.input-box:nth-child(2) { transition-delay: 0.2s; }
+.input-box:nth-child(3) { transition-delay: 0.3s; }
+.input-box:nth-child(4) { transition-delay: 0.4s; }
+.input-box:nth-child(5) { transition-delay: 0.5s; }
+.input-box:nth-child(6) { transition-delay: 0.6s; }
+
+
+.input-box {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Cada caixa terá um pequeno atraso (efeito cascata) */
+.input-box:nth-* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    text-align: center;
+    width: 300px;
+  }
+  
+  .login-signup {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .box {
+    padding: 10px 20px;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .box:hover {
+    background-color: #bbb;
+  }
+  
+  .box.active {
+    background-color: #333;
+    color: white;
+  }
+  
+  .input-fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .input-box {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease, margin 0.4s ease;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    border: none;
+  }
+  
+  /* Estado visível com transição */
+  .input-box:not(.hidden) {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    height: auto;
+    margin: 10px 0;
+  }
+  
+/* Efeito cascata */
+.input-box:nth-child(1) { transition-delay: 0.1s; }
+.input-box:nth-child(2) { transition-delay: 0.2s; }
+.input-box:nth-child(3) { transition-delay: 0.3s; }
+.input-box:nth-child(4) { transition-delay: 0.4s; }
+.input-box:nth-child(5) { transition-delay: 0.5s; }
+.input-box:nth-child(6) { transition-delay: 0.6s; }
+
+
+.input-box:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  height: auto;
+  margin: 10px 0;
+}
