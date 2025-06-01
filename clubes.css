@@ -82,13 +82,11 @@ body {
 /* CÍRCULO */
 .circulo {
   position: absolute;
-  top: 30px; 
+  top: 20px; 
   left:50%;  
-  width: 120px;
-  height: 60px;
+  width: 200px;
+  height: 70px;
   transform: translateX(-50%);
-  width: 120px;
-  height: 60px;
   background-color: #1D4355;
   border-radius: 50%;
   display: flex;
@@ -127,6 +125,11 @@ div{
   flex-wrap: wrap;
 }
 
+div h2{
+  font-size: 40px;
+  color: #1D4355;
+}
+
 /* TEXTO */
 .text-content {
    display: flex;
@@ -140,6 +143,7 @@ div{
   margin-top: 20px;
 }
 
+/*quando box expanded é aplicado, text content também é*/
 .box.expanded .text-content {
   opacity: 1;
 }
