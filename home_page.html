@@ -6,38 +6,7 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="home_page.css">
    <style>
-        /* Estilo para pop-up */
-        #popup {
-            display: none;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            background-color: #E8E8E8;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            z-index: 10000;
-            width: 300px;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        #popup.bom {
-            top: 60%;
-            left: 50%;
-            border: 3px solid green;
-            color: green;
-        }
-        #popup.ruim {
-            top: 30%;
-            left: 50%;
-            border: 3px solid red;
-            color: red;
-        }
-        #popup button {
-            margin-top: 15px;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+       
     </style>
     <script>
         function mostrar(secao) {
@@ -61,39 +30,38 @@
         }
 
         // Quando a página carregar, buscar dados do clima
-        window.onload = function() {
-            const API_KEY = '78407d143c58491e3d2922b09b2576eb';
-            const cidade = 'Lisbon';
+    window.onload = function() {
+    const API_KEY = '78407d143c58491e3d2922b09b2576eb';
+    const cidade = 'Lisbon';
 
-            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade},PT&units=metric&appid=${API_KEY}&lang=pt`)
-                .then(res => res.json())
-                .then(data => {
-                    const temp = data.main.temp;
-                    const vento = data.wind.speed;
-                    const descricao = data.weather[0].description.toLowerCase();
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade},PT&units=metric&appid=${API_KEY}&lang=pt`)
+        .then(res => res.json())
+        .then(data => {
+            const temp = data.main.temp;
+            const vento = data.wind.speed;
+            const descricao = data.weather[0].description.toLowerCase();
 
-                    // Regras para decidir se o clima é bom ou ruim
-                    const condicaoRuim = (temp > 25) || ((descricao.includes("chuva") || descricao.includes("tempestade")) && vento > 5);
+            // Regras para decidir se o clima é bom ou ruim
+            const condicaoRuim = (temp > 25) || ((descricao.includes("chuva") || descricao.includes("tempestade")) && vento > 5);
 
-                 if (condicaoRuim) {
-    mostrarPopup(
-        `⚠️ Condições meteorológicas perigosas para canoagem! Verifique a secção de meteorologia para saber mais.`, 
-        'ruim'
-    );
-} else {
-    mostrarPopup(
-        `👍 Condições favoráveis para canoagem!`, 
-        'bom'
-    );
-}
+            if (condicaoRuim) {
+                mostrarPopup(
+                    `⚠️ Condições meteorológicas perigosas para canoagem! Verifique a secção de meteorologia para saber mais.`, 
+                    'ruim'
+                );
+            } else {
+                mostrarPopup(
+                    `👍 Condições favoráveis para canoagem!`, 
+                    'bom'
+                );
+            }
+        })
+        .catch(err => {
+            console.error("Erro ao buscar dados do clima:", err);
+            mostrarPopup('Não foi possível carregar os dados meteorológicos.', 'ruim');
+        });
+};
 
-                })
-                .catch(err => {
-                    console.error("Erro ao buscar dados do clima:", err);
-                    // Opcional: mostrar mensagem de erro no pop-up
-                    mostrarPopup('Não foi possível carregar os dados meteorológicos.', 'ruim');
-                });
-        };
     </script>
 </head>
 <body>
@@ -158,15 +126,81 @@
         </a>
     </div>
 
+    <!-- Pop-up -->
+    <div id="popup"></div>
+    <div id="chat-toggle" onclick="toggleChat()">?</div>
+
+<div class="chatbot-container" id="chatbot">
+  <div class="chat-window" id="chat-window"></div>
+  <input type="text" id="user-input" placeholder="Escreve a tua dúvida..." />
+  <button onclick="enviarMensagem()">Enviar</button>
+</div>
+<script>
+let estado = 0;
+
+function toggleChat() {
+  const chatbot = document.getElementById('chatbot');
+  if (estado === 0) {
+    chatbot.classList.add('aberto');
+    estado = 1;
+  } else {
+    chatbot.classList.remove('aberto');
+    estado = 0;
+  }
+}
+
+async function enviarMensagem() {
+  const input = document.getElementById('user-input');
+  const chatWindow = document.getElementById('chat-window');
+  const mensagem = input.value;
+  input.value = '';
+
+  chatWindow.innerHTML += `<div><strong>Tu:</strong> ${mensagem}</div>`;
+
+  const resposta = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer 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"
+    },
+    body: JSON.stringify({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system", 
+          content: "És um assistente útil que responde a dúvidas sobre a app e sobre canoagem em geral. o app tem um sign up, onde se cria uma conta, e um login, onde se entra no app. No home page, existe sempre um pop up a dizer se está bom ou mau tempo. Existem, também na homepage, três divisões: na primeira, o que é, explica-se, mais ou menos, o que é o desporto. Na segunda divisão, vantagens, explicam-se as vantagens do desporto. Na última divisão, regras, explicam-se as regras de equipamento, percurso, e conduta. A partir do botão onde praticar, o usuário depara-se com duas opções de clube. Em primeiro lugar, o clube jamor, e em segundo, o clube mar costa sul. Para ambas as opçoes, ao clicar numa caixa, têm o nome completo do clube, os contactos, e o link para um pdf onde podem baixar horários. Ao clicar na seta no nav bar, o usuário pode regressar à página incial. Clicando no botão mais, acedem ao menu do aplicativo. Ao clicar no ícon do sol, o usuário tem acesso à meteorologia, de forma mais detalhada, e também à segurança marítima. No botão das três linhas, ao clicar têm duas opções. A primeira, acount, leva aos detalhes de conta. O segundo, o sobre nós, tem informação sobre as criadoras do app. Não há como recuperar a password, se o usuário se esqueceu, tem de criar uma nova conta. "
+        },
+        {
+          role: "user",
+          content: mensagem
+        }
+      ]
+    })
+  });
+
+  const dados = await resposta.json();
+  if (dados.choices && dados.choices[0]?.message?.content) {
+    chatWindow.innerHTML += `<div><strong>Bot:</strong> ${dados.choices[0].message.content}</div>`;
+  } else {
+    chatWindow.innerHTML += `<div><strong>Bot:</strong> Não recebi uma resposta válida da API.</div>`;
+    console.error("Resposta inesperada:", dados);
+  }
+
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+</script>
+
+</body>
+
 <footer>
     <div class="footer">
         <input type="checkbox" id="toggle" checked />
         <label class="button" for="toggle">
             <nav class="nav">
                 <ul>
-                    <li><a href="home_page.html"><h2>&#x2302;</h2></a></li>
+                    <li><a href="home page.html"><h2>&#x2302;</h2></a></li>
                     <li><a href="meteorologia.html"><h2>&#9788;</h2></a></li>
-                    <li><a href="account.html"><h2>&#9776;</h2></a></li>
+                    <li><a href="maisinfo.html"><h2>&#9776;</h2></a></li>
                 </ul>
             </nav>
         </label>
