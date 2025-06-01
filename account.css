@@ -10,20 +10,16 @@ body {
 }
 
 .profile-card {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    border-radius: 20px;
-    background: #1D4355;
-    font-family:Arial, Helvetica, sans-serif;
-  }
-  
-  .profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-  }
+  max-width: 400px; /* Set a reasonable max width */
+  margin: 0 auto; /* Center horizontally */
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: #1D4355;
+  font-family:Arial, Helvetica, sans-serif;
+  align-content: center;
+  align-items: center;
+}
 
 button {
   width: 100px;
@@ -34,12 +30,17 @@ button {
   text-decoration: none;
 }
 
-img {
+.waves-img {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .sobrenós {
-  width: 360px;
+  max-width: 400px; /* Set a reasonable max width */
+  margin: 0 auto; /* Center horizontally */
   height: fit-content;
   padding: 20px;
   background-color: #8ed6d6;
@@ -54,6 +55,8 @@ img {
 .sobrenós img {
   padding: 0;
   margin: 0;
+  width: 100%; /* Make it stretch to the full width of its parent */
+  max-width: 100%; /* Prevent overflow */
 }
 
 .edit-profile {
