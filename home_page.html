@@ -63,13 +63,39 @@
 };
 
     </script>
+           <script>
+        function mostrar(secao) {
+        // Hide all sections
+        document.getElementById("oque").style.display = "none";
+        document.getElementById("vantagens").style.display = "none";
+        document.getElementById("regras").style.display = "none";
+
+        // Show selected section
+        document.getElementById(secao).style.display = "block";
+
+        // Remove underline from all nav items
+        document.getElementById("op_oque").style.borderBottom = "none";
+        document.getElementById("op_vantagens").style.borderBottom = "none";
+        document.getElementById("op_regras").style.borderBottom = "none";
+
+        // Add underline to selected nav item
+        if (secao === "oque") {
+            document.getElementById("op_oque").style.borderBottom = "2px solid black";
+        } else if (secao === "vantagens") {
+            document.getElementById("op_vantagens").style.borderBottom = "2px solid black";
+        } else if (secao === "regras") {
+            document.getElementById("op_regras").style.borderBottom = "2px solid black";
+     }
+}
+
+      </script>
 </head>
 <body>
     <div class="nav-bar">
-        <a href="#" class="nav-item" onclick="mostrar('oque')">O que é</a>
-        <a href="#" class="nav-item" onclick="mostrar('vantagens')">Vantagens</a>
-        <a href="#" class="nav-item" onclick="mostrar('regras')">Regras</a>
-    </div>
+        <a href="#" id="op_oque" class="nav-item" onclick="mostrar('oque')">O que é</a>
+        <a href="#" id="op_vantagens" class="nav-item" onclick="mostrar('vantagens')">Vantagens</a>
+        <a href="#" id="op_regras" class="nav-item" onclick="mostrar('regras')">Regras</a>
+      </div> 
 
     <div id="oque" style="display: block;">
         <p class="cxCaixas">
