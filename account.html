@@ -22,7 +22,15 @@
           document.getElementById('user-name').textContent = userData.name;
           document.getElementById('user-email').textContent = `Email: ${userData.email}`;
         };
+
+        function irParaOutraPagina() {
+      window.location.href = 'home_page.html'; 
+    }
       </script>
+        <nav class="navbar">
+            <button class="back-button" aria-label="Voltar" onclick="irParaOutraPagina()">&#8592;</button>
+            <span class="navbar-title">Perfil</span>
+          </nav>
     <div class="edit-profile">
         <div class="profile-card">
             <h1 id="user-name">Nome</h1>
@@ -37,18 +45,4 @@
         </div>
     </div>
 </body>
-<footer>
-    <div class="footer">
-        <input type="checkbox" id="toggle" checked />
-        <label class="button" for="toggle">
-            <nav class="nav">
-                <ul>
-                    <li><a href="home_page.html"><h2>&#x2302;</h2></a></li>
-                    <li><a href="meteorologia.html"><h2>&#9788;</h2></a></li>
-                    <li><a href="maisinfo.html"><h2>&#9776;</h2></a></li>
-                </ul>
-            </nav>
-        </label>
-    </div>
-</footer>
 </html>
